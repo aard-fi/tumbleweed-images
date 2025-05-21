@@ -1,0 +1,36 @@
+#!/bin/bash
+
+export MOZ_USE_XINPUT2=1
+export MOZ_ENABLE_WAYLAND="1"
+# for controlling styling, themes, ... with qt5ct
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+export QT_QPA_PLATFORM="wayland;xcb"
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+export QT_QPA_PLATFORMTHEME=qt5ct
+export CLUTTER_BACKEND="wayland"
+export _JAVA_AWT_WM_NONREPARENTING=1
+export SDL_VIDEODRIVER=wayland
+export GDK_BACKEND=wayland,x11
+export GTK_THEME=adwaita
+
+# those are also set in the container specification
+export XDG_RUNTIME_DIR="/var/run/user/1000"
+export DBUS_SESSION_BUS_ADDRESS="unix:path=/var/run/user/1000/bus"
+export WAYLAND_DISPLAY="wayland-0"
+
+if [ -z "${DBUS_UUID}" ]; then
+    DBUS_UUID=`dbus-uuidgen`
+fi
+
+if [ ! -s /etc/machine-id ]; then
+    echo ${DBUS_UUID} > /etc/machine-id
+fi
+
+dbus_pid=`pgrep dbus-daemon`
+
+if [ -z "$dbus_pid" ]; then
+# TODO: add support for creating a dummy file for dbus proxied in from the host
+    dbus-daemon --session --address="$DBUS_SESSION_BUS_ADDRESS" --fork
+fi
+
+exec $@

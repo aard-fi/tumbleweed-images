@@ -1,0 +1,145 @@
+name: Build and deploy containers
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  tw-base:
+    runs-on: opensuse-leap-imgbuild
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@main
+
+      - name: 'Login to GitHub Container Registry'
+        uses: redhat-actions/podman-login@v1
+        with:
+          registry: ghcr.io
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Build base image for tumbleweed
+        uses: aardsoft/ci-actions/kiwi-build@master
+        with:
+          image-directory: tumbleweed-base
+          repository: https://mirror.aardsoft.fi/opensuse///tumbleweed/repo/oss
+          extra-repositories: |
+            https://mirror.aardsoft.fi/opensuse/tumbleweed/repo/non-oss
+
+  tw-derived-base:
+    needs:
+      - tw-base
+    runs-on: opensuse-leap-imgbuild
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@main
+
+      - name: 'Login to GitHub Container Registry'
+        uses: redhat-actions/podman-login@v1
+        with:
+          registry: ghcr.io
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Build wayland base image
+        uses: aardsoft/ci-actions/kiwi-build@master
+        with:
+          image-directory: wayland-base
+          repository: https://mirror.aardsoft.fi/opensuse/tumbleweed/repo/oss
+          extra-repositories: |
+            https://mirror.aardsoft.fi/opensuse/tumbleweed/repo/non-oss
+
+  tw-derived:
+    needs:
+      - tw-base
+    runs-on: opensuse-leap-imgbuild
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@main
+
+      - name: 'Login to GitHub Container Registry'
+        uses: redhat-actions/podman-login@v1
+        with:
+          registry: ghcr.io
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Build tw dev image
+        uses: aardsoft/ci-actions/kiwi-build@master
+        with:
+          image-directory: dev-tumbleweed
+          repository: https://mirror.aardsoft.fi/opensuse/tumbleweed/repo/oss
+          kiwi-debug: true
+          extra-repositories: |
+            https://mirror.aardsoft.fi/opensuse/tumbleweed/repo/non-oss
+            http://download.opensuse.org/repositories/CrossToolchain:/avr/openSUSE_Tumbleweed/
+            http://download.opensuse.org/repositories/devel:/gcc/openSUSE_Factory/
+            https://download.opensuse.org/repositories/devel:/languages:/ruby:/extensions/openSUSE_Tumbleweed/
+            http://download.opensuse.org//repositories//home:/bhwachter/openSUSE_Tumbleweed
+            https://packages.microsoft.com/opensuse/15/prod
+            https://download.opensuse.org/repositories/windows:/mingw:/win64/openSUSE_Tumbleweed/
+
+  tw-derived-base-derived:
+    needs:
+      - tw-derived-base
+    runs-on: opensuse-leap-imgbuild
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@main
+
+      - name: 'Login to GitHub Container Registry'
+        uses: redhat-actions/podman-login@v1
+        with:
+          registry: ghcr.io
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Build firefox image
+        uses: aardsoft/ci-actions/kiwi-build@master
+        with:
+          image-directory: wayland/firefox
+          repository: https://mirror.aardsoft.fi/opensuse/tumbleweed/repo/oss
+          extra-repositories: |
+            https://mirror.aardsoft.fi/opensuse/tumbleweed/repo/non-oss
+            https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/
+
+      - name: Build krita image
+        uses: aardsoft/ci-actions/kiwi-build@master
+        with:
+          image-directory: wayland/krita
+          repository: https://mirror.aardsoft.fi/opensuse/tumbleweed/repo/oss
+          extra-repositories: |
+            https://mirror.aardsoft.fi/opensuse/tumbleweed/repo/non-oss
+
+      - name: Build wireshark image
+        uses: aardsoft/ci-actions/kiwi-build@master
+        with:
+          image-directory: wayland/wireshark
+          repository: https://mirror.aardsoft.fi/opensuse/tumbleweed/repo/oss
+          extra-repositories: |
+            https://mirror.aardsoft.fi/opensuse/tumbleweed/repo/non-oss
+
+      - name: Build chromium image
+        uses: aardsoft/ci-actions/kiwi-build@master
+        with:
+          image-directory: wayland/chromium
+          repository: https://mirror.aardsoft.fi/opensuse/tumbleweed/repo/oss
+          extra-repositories: |
+            https://mirror.aardsoft.fi/opensuse/tumbleweed/repo/non-oss
+            https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/
+
+      - name: Build google-chrome image
+        uses: aardsoft/ci-actions/kiwi-build@master
+        with:
+          image-directory: wayland/google-chrome
+          repository: https://mirror.aardsoft.fi/opensuse/tumbleweed/repo/oss
+          extra-repositories: |
+            http://dl.google.com/linux/chrome/rpm/stable/x86_64
+            https://mirror.aardsoft.fi/opensuse/tumbleweed/repo/non-oss
+            https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/

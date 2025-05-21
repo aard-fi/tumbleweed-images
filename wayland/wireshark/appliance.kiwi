@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<image schemaversion="7.5" name="wireshark">
+    <description type="system">
+        <author>Bernd Wachter</author>
+        <contact>bernd-container@wachter.fi</contact>
+        <specification>SUSE derived docker container</specification>
+    </description>
+    <preferences>
+        <type image="docker" derived_from="ghcr.io/aard-fi/suse-wayland-base:latest">
+            <containerconfig name="ghcr.io/aard-fi/wireshark" tag="0.1" additionalnames=":latest"/>
+        </type>
+        <version>0.0.1</version>
+        <packagemanager>zypper</packagemanager>
+        <rpm-excludedocs>true</rpm-excludedocs>
+    </preferences>
+    <repository type="rpm-md">
+        <source path="obsrepositories:/"/>
+    </repository>
+    <packages type="image">
+      <package name="wireshark"/>
+      <package name="wireshark-ui-qt"/>
+    </packages>
+</image>

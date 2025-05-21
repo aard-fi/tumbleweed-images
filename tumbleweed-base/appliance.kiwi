@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<image schemaversion="7.5" name="tumbleweed-base">
+    <description type="system">
+        <author>Marcus Schäfer</author>
+        <contact>ms@suse.com</contact>
+        <specification>docker test build</specification>
+    </description>
+    <preferences>
+        <version>2.1.0</version>
+        <packagemanager>zypper</packagemanager>
+        <rpm-excludedocs>true</rpm-excludedocs>
+        <rpm-check-signatures>false</rpm-check-signatures>
+        <locale>en_US</locale>
+        <keytable>us</keytable>
+        <type image="docker">
+            <containerconfig name="ghcr.io/aard-fi/suse-tumbleweed-base" tag="0.1" user="user" workingdir="/home/user" />
+        </type>
+    </preferences>
+    <users>
+        <user password="$6$zHeHZ84nd8dFO06g$g1hn8cZH.RkIu.FKA6piHlC2yodKPoRio6HIoHgy5UyUf4xgc8p9fqHHju8NsefMc9hJhxTvwMEBcob.UCBl0." home="/root" name="root" groups="root"/>
+    </users>
+    <users>
+        <user name="user" password="$6$VKXp9Jaaojk1$9EJRn11GDX05d2kiIHsjyrjh/ODNgmHJyQu0X/c2WYr34ACkCdaqzAgf29vvWLqy/GN8iqQ5r33M4BXa87XB1." home="/home/user" groups="user"/>
+    </users>
+    <repository type="rpm-md">
+        <source path="obsrepositories:/"/>
+    </repository>
+    <packages type="image">
+        <package name="libcap-progs"/>
+        <package name="grub2"/>
+        <package name="ncurses-utils"/>
+        <package name="patterns-openSUSE-base"/>
+        <package name="systemd"/>
+        <package name="bash"/>
+        <package name="acl"/>
+        <package name="coreutils"/>
+        <package name="cpio"/>
+        <package name="dbus-1-daemon"/>
+        <package name="findutils"/>
+        <package name="dracut"/>
+        <package name="pigz"/>
+        <package name="elfutils"/>
+        <package name="iputils"/>
+        <package name="tar"/>
+        <package name="psmisc"/>
+        <package name="lvm2"/>
+        <package name="fontconfig"/>
+        <package name="fonts-config"/>
+        <package name="tar"/>
+        <package name="parted"/>
+        <package name="sudo"/>
+        <package name="rsync"/>
+        <package name="sg3_utils"/>
+        <package name="btrfsprogs"/>
+        <package name="squashfs"/>
+        <package name="kernel-default"/>
+        <package name="fipscheck"/>
+        <package name="python3"/>
+    </packages>
+    <packages type="bootstrap">
+        <package name="gawk"/>
+        <package name="grep"/>
+        <package name="gzip"/>
+        <package name="udev"/>
+        <package name="xz"/>
+        <package name="shadow"/>
+        <package name="filesystem"/>
+        <package name="glibc-locale"/>
+        <package name="cracklib-dict-full"/>
+        <package name="ca-certificates"/>
+        <package name="ca-certificates-mozilla"/>
+        <package name="openSUSE-release"/>
+    </packages>
+    <packages type="delete">
+        <package name="kernel-default"/>
+        <package name="aaa_base"/>
+        <package name="dbus-1"/>
+        <package name="fipscheck"/>
+        <package name="kbd"/>
+        <package name="kmod"/>
+        <package name="ncurses-utils"/>
+        <package name="pinentry"/>
+        <package name="sg3_utils"/>
+        <package name="udev"/>
+    </packages>
+</image>
