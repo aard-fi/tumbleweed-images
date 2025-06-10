@@ -1,0 +1,16 @@
+#!/bin/bash
+
+PACKAGE=$1
+shift
+
+OUTFILE=/export-sbin
+if [ -n "$1" ]; then
+    OUTFILE="$1"
+fi
+
+if [ -z "$PACKAGE" ]; then
+    echo "Package missing, should be first argument"
+    exit 1
+fi
+
+rpm -ql "$PACKAGE" | grep /usr/sbin >> "$OUTFILE" || true

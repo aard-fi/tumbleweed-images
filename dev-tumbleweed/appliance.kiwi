@@ -352,7 +352,4 @@
     <package name='pkgconfig(xxf86vm)'/>
     <package name='pkgconfig(zlib)'/>
   </packages>
-  <packages type="delete">
-    <package name="busybox-diffutils"/>
-  </packages>
 </image>

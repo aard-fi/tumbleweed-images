@@ -12,7 +12,7 @@
             <environment>
               <env name="XDG_RUNTIME_DIR" value="/var/run/user/1000" />
               <env name="DBUS_SESSION_BUS_ADDRESS" value="unix:path=/var/run/user/1000/bus" />
-              <env name="WAYLAND_DISPYLAY" value="wayland-0" />
+              <env name="WAYLAND_DISPLAY" value="wayland-0" />
             </environment>
           </containerconfig>
         </type>

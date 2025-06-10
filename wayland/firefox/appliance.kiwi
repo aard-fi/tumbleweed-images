@@ -28,6 +28,6 @@
       <package name="gstreamer-plugins-ugly"/>
       <package name="gstreamer-plugins-good"/>
       <package name="gstreamer-plugin-pipewire"/>
-      <package name="gstreamer-plugins-good-qtqml"/>
+      <!-- <package name="gstreamer-plugins-good-qtqml"/> -->
     </packages>
 </image>

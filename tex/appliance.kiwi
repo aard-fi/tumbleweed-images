@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<image schemaversion="7.5" name="tex">
+    <description type="system">
+        <author>David Cassany</author>
+        <contact>dcassany@suse.de</contact>
+        <specification>SUSE derived docker container</specification>
+    </description>
+    <preferences>
+        <type image="docker" derived_from="ghcr.io/aard-fi/suse-tumbleweed-base:latest">
+          <containerconfig name="ghcr.io/aard-fi/suse-tex" tag="0.2" additionalnames=":latest">
+            <environment>
+              <env name="XDG_RUNTIME_DIR" value="/var/run/user/1000" />
+              <env name="DBUS_SESSION_BUS_ADDRESS" value="unix:path=/var/run/user/1000/bus" />
+            </environment>
+          </containerconfig>
+        </type>
+        <version>2.1.0</version>
+        <packagemanager>zypper</packagemanager>
+        <rpm-excludedocs>true</rpm-excludedocs>
+    </preferences>
+    <repository type="rpm-md">
+        <source path="obsrepositories:/"/>
+    </repository>
+    <packages type="image">
+      <package name="texinfo"/>
+      <package name="makeinfo"/>
+      <package name="texlive-pdfcrop-bin"/>
+      <package name="texlive-pst-tools"/>
+      <package name="texlive-collection-basic"/>
+      <package name="texlive-collection-latex"/>
+      <package name="texlive-collection-fontsrecommended"/>
+      <package name="texlive-collection-latexrecommended"/>
+      <package name="texlive-collection-langenglish"/>
+      <package name="texlive-extratools"/>
+      <package name="texlive-dingbat"/>
+      <package name="texlive-niceframe"/>
+      <package name="texlive-wallpaper"/>
+      <package name="texlive-epstopdf"/>
+      <package name="texlive-pst-barcode"/>
+      <package name="texlive-epstopdf-bin"/>
+      <package name="texlive-adobemapping"/>
+      <package name="texlive-apnum"/>
+      <package name="texlive-auto-pst-pdf"/>
+      <package name="texlive-capt-of"/>
+      <package name="texlive-chronology"/>
+      <package name="texlive-chronology-doc"/>
+      <package name="texlive-cmsd"/>
+      <package name="texlive-currvita"/>
+      <package name="texlive-dinbrief"/>
+      <package name="texlive-dowith"/>
+      <package name="texlive-envlab"/>
+      <package name="texlive-envlab-doc"/>
+      <package name="texlive-flabels"/>
+      <package name="texlive-flabels-doc"/>
+      <package name="texlive-fontname"/>
+      <package name="texlive-g-brief"/>
+      <package name="texlive-kastrup"/>
+      <package name="texlive-labels"/>
+      <package name="texlive-labels-doc"/>
+      <package name="texlive-langcode"/>
+      <package name="texlive-moderntimeline"/>
+      <package name="texlive-moderntimeline-doc"/>
+      <package name="texlive-path"/>
+      <package name="texlive-pdf14"/>
+      <package name="texlive-plantslabels"/>
+      <package name="texlive-plantslabels-doc"/>
+      <package name="texlive-preview"/>
+      <package name="texlive-pst-pdf"/>
+      <package name="texlive-pst-pdf-bin"/>
+      <package name="texlive-tex-ps"/>
+      <package name="texlive-ticket"/>
+      <package name="texlive-ticket-doc"/>
+      <package name="texlive-titling"/>
+      <package name="texlive-ulem"/>
+      <package name="texlive-wrapfig"/>
+    </packages>
+</image>

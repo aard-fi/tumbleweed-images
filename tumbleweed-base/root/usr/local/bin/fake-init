@@ -1,0 +1,24 @@
+#!/bin/bash
+
+export LANG="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+
+if [ -d "$HOME/bin" ]; then
+    export PATH="$HOME/bin:$PATH"
+fi
+
+if [ -n "$1" ]; then
+    $1 &
+    main_pid=$!
+else
+    echo "Argument missing"
+    exit 1
+fi
+
+while kill -0 "$main_pid" 2>/dev/null; do
+    if ! wait -n; then
+        sleep 1
+    fi
+done
+
+wait "$main_pid"

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<image schemaversion="7.5" name="hyprland">
+    <description type="system">
+        <author>Bernd Wachter</author>
+        <contact>bernd-container@wachter.fi</contact>
+        <specification>SUSE derived docker container</specification>
+    </description>
+    <preferences>
+      <type image="docker" derived_from="ghcr.io/aard-fi/suse-wayland-base:latest">
+        <containerconfig name="ghcr.io/aard-fi/hyprland" tag="0.1" additionalnames=":latest">
+          <environment>
+            <env name="XDG_RUNTIME_DIR" value="/run/user/1000" />
+            <env name="DBUS_SESSION_BUS_ADDRESS" value="unix:path=/run/user/1000/bus" />
+            <env name="WAYLAND_DISPLAY" value="wayland-1" />
+          </environment>
+        </containerconfig>
+      </type>
+      <version>0.0.1</version>
+      <packagemanager>zypper</packagemanager>
+      <rpm-excludedocs>true</rpm-excludedocs>
+    </preferences>
+    <repository type="rpm-md">
+        <source path="obsrepositories:/"/>
+    </repository>
+    <packages type="image">
+      <package name="hyprland"/>
+      <package name="hyprgrass"/>
+      <package name="libiio"/>
+      <package name="iio-sensor-proxy"/>
+      <package name="iio-hyprland"/>
+      <package name="nwg-drawer"/>
+      <package name="nwg-dock-hyprland"/>
+      <package name="ddcutil"/>
+      <package name="eww"/>
+      <package name="foot"/>
+      <package name="swaylock"/>
+      <package name="anyrun"/>
+      <package name="anyrun-plugin-exec"/>
+      <package name="wofi"/>
+      <package name="wofi-pass"/>
+      <package name="wl-clipboard"/>
+      <package name="swaybg"/>
+      <package name="grim"/>
+      <package name="xdg-desktop-portal-hyprland"/>
+      <package name="pipewire"/>
+      <package name="slurp"/>
+      <package name="wob"/>
+      <package name="playerctl"/>
+      <package name="brightnessctl"/>
+      <package name="kanshi"/>
+      <package name="hyprland"/>
+      <package name="libinput-udev"/>
+      <package name="xf86-input-wacom"/>
+      <package name="libwacom-tools"/>
+      <package name="xinput"/>
+      <package name="xev"/>
+      <package name="ksshaskpass5"/>
+      <package name="stl-thumb"/>
+      <package name="ffmpegthumbnailer"/>
+      <package name="raw-thumbnailer"/>
+      <package name="wvkbd"/>
+      <package name="pipewire-pulseaudio"/>
+      <package name="pipewire-tools"/>
+      <package name="pipewire"/>
+      <package name="pipewire-aptx"/>
+      <package name="gstreamer-plugin-pipewire"/>
+      <package name="wireplumber"/>
+      <package name="qpwgraph"/>
+      <package name="pavucontrol-qt"/>
+      <package name="pamixer"/>
+      <package name="qt5ct"/>
+      <package name="blueman"/>
+      <package name="socat"/>
+      <package name="ffmpeg-7"/>
+      <package name="gstreamer-plugins-libav"/>
+      <package name="gstreamer-plugins-good-extra"/>
+      <package name="gstreamer-plugins-ugly-codecs"/>
+      <package name="gstreamer-plugins-base"/>
+      <package name="gstreamer-plugins-bad"/>
+      <package name="gstreamer-plugins-ugly"/>
+      <package name="gstreamer-plugins-good"/>
+      <package name="gstreamer-plugin-pipewire"/>
+      <!-- <package name="gstreamer-plugins-good-qtqml"/> -->
+    </packages>
+</image>
