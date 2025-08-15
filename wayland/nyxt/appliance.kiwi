@@ -19,6 +19,7 @@
     </repository>
     <packages type="image">
       <package name="nyxt"/>
+      <package name="libgirepository-1_0-1"/>
       <package name="ffmpeg-7"/>
       <package name="gstreamer-plugins-libav"/>
       <package name="gstreamer-plugins-good-extra"/>
