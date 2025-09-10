@@ -53,5 +53,7 @@
         <package name="google-droid-fonts"/>
         <package name="google-poppins-fonts"/>
         <package name="google-roboto-fonts"/>
+        <package name="wl-clipboard"/>
+        <package name="iputils"/>
     </packages>
 </image>

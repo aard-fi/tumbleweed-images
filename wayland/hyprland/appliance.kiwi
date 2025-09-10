@@ -24,6 +24,7 @@
         <source path="obsrepositories:/"/>
     </repository>
     <packages type="image">
+      <package name="podman"/>
       <package name="hyprland"/>
       <package name="hyprgrass"/>
       <package name="libiio"/>
