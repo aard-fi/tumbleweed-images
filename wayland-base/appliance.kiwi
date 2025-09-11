@@ -55,5 +55,6 @@
         <package name="google-roboto-fonts"/>
         <package name="wl-clipboard"/>
         <package name="iputils"/>
+        <package name="iproute2"/>
     </packages>
 </image>
