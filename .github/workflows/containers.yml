@@ -71,6 +71,15 @@ jobs:
           username: ${{github.actor}}
           password: ${{secrets.GITHUB_TOKEN}}
 
+      - name: Build nginx image
+        uses: aardsoft/ci-actions/kiwi-build@master
+        with:
+          image-directory: nginx
+          repository: https://mirror.aardsoft.fi/opensuse/tumbleweed/repo/oss
+          kiwi-debug: true
+          extra-repositories: |
+            https://mirror.aardsoft.fi/opensuse/tumbleweed/repo/non-oss
+
       - name: Build tex image
         uses: aardsoft/ci-actions/kiwi-build@master
         with:
