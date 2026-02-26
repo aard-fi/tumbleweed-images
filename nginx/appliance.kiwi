@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<image schemaversion="7.5" name="tex">
+<image schemaversion="7.5" name="nginx">
     <description type="system">
         <author>David Cassany</author>
         <contact>dcassany@suse.de</contact>
@@ -8,7 +8,7 @@
     </description>
     <preferences>
         <type image="docker" derived_from="ghcr.io/aard-fi/suse-tumbleweed-base:latest">
-          <containerconfig name="ghcr.io/aard-fi/suse-tex" tag="0.2" additionalnames=":latest">
+          <containerconfig name="ghcr.io/aard-fi/suse-nginx" tag="0.2" additionalnames=":latest">
             <environment>
               <env name="XDG_RUNTIME_DIR" value="/var/run/user/1000" />
               <env name="DBUS_SESSION_BUS_ADDRESS" value="unix:path=/var/run/user/1000/bus" />

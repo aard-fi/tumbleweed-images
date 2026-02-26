@@ -32,5 +32,3 @@ echo "Configure image: [$kiwi_iname]..."
 if [ -f /usr/sbin/sshd-gen-keys-start ]; then
     /usr/sbin/sshd-gen-keys-start
 fi
-
-(cd /usr/share/locale && find -name "*.mo" | xargs rm)
