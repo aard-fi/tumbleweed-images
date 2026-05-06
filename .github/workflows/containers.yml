@@ -25,7 +25,7 @@ jobs:
           password: ${{secrets.GITHUB_TOKEN}}
 
       - name: Build base image for tumbleweed
-        uses: aardsoft/ci-actions/kiwi-build@master
+        uses: aardsoft/ci-actions/kiwi-build-multiarch@master
         with:
           image-directory: tumbleweed-base
           kiwi-debug: true
